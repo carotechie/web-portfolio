@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGradient" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9d5ff;stop-opacity:0.3" />
+    </radialGradient>
+    
+    <!-- Drop Shadow Filter -->
+    <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Ground Shadow -->
+    <radialGradient id="groundShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#94a3b8;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#94a3b8;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGradient)"/>
+  
+  <!-- Ground Shadow -->
+  <ellipse cx="400" cy="520" rx="180" ry="25" fill="url(#groundShadow)"/>
+  
+  <!-- Desk -->
+  <rect x="150" y="450" width="500" height="15" rx="7" fill="#e2e8f0"/>
+  <rect x="160" y="465" width="480" height="5" rx="2" fill="#cbd5e1"/>
+  
+  <!-- Woman Character -->
+  <g transform="translate(320, 280)">
+    <!-- Long Brown Hair - Back Layer -->
+    <path d="M -35 -50 Q -45 -40 -50 -20 Q -52 0 -50 20 Q -48 40 -45 60 Q -42 80 -38 100 L -30 100 Q -32 80 -35 60 Q -38 40 -40 20 Q -42 0 -40 -20 Q -38 -35 -30 -45 Z" fill="#5d4037"/>
+    <path d="M 35 -50 Q 45 -40 50 -20 Q 52 0 50 20 Q 48 40 45 60 Q 42 80 38 100 L 30 100 Q 32 80 35 60 Q 38 40 40 20 Q 42 0 40 -20 Q 38 -35 30 -45 Z" fill="#5d4037"/>
+    <path d="M -20 -55 Q -25 -35 -28 -10 Q -30 15 -32 40 Q -34 65 -35 90 L -28 92 Q -26 67 -24 42 Q -22 17 -20 -8 Q -18 -33 -15 -50 Z" fill="#5d4037"/>
+    <path d="M 20 -55 Q 25 -35 28 -10 Q 30 15 32 40 Q 34 65 35 90 L 28 92 Q 26 67 24 42 Q 22 17 20 -8 Q 18 -33 15 -50 Z" fill="#5d4037"/>
+    
+    <!-- Body - Smart Blazer -->
+    <!-- Shoulders and upper body -->
+    <path d="M -45 20 L -50 40 L -45 100 L -20 120 L 20 120 L 45 100 L 50 40 L 45 20 Q 40 15 30 15 L -30 15 Q -40 15 -45 20 Z" fill="#6366f1"/>
+    <!-- Blazer lapels -->
+    <path d="M -30 15 L -35 30 L -25 50 L -15 40 L -10 20 Z" fill="#4f46e5"/>
+    <path d="M 30 15 L 35 30 L 25 50 L 15 40 L 10 20 Z" fill="#4f46e5"/>
+    <!-- Inner blouse -->
+    <path d="M -10 20 L -15 40 L -10 60 L 0 65 L 10 60 L 15 40 L 10 20 Z" fill="#ffffff" opacity="0.9"/>
+    
+    <!-- Arms -->
+    <!-- Left arm -->
+    <path d="M -45 30 Q -60 50 -70 70 Q -75 85 -75 100" stroke="#6366f1" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <!-- Right arm -->
+    <path d="M 45 30 Q 60 50 70 70 Q 75 85 75 100" stroke="#6366f1" stroke-width="16" stroke-linecap="round" fill="none"/>
+    
+    <!-- Hands -->
+    <ellipse cx="-75" cy="105" rx="12" ry="15" fill="#fbbf24"/>
+    <ellipse cx="75" cy="105" rx="12" ry="15" fill="#fbbf24"/>
+    <!-- Fingers suggestion -->
+    <path d="M -75 95 L -75 85" stroke="#d4a574" stroke-width="3" stroke-linecap="round"/>
+    <path d="M -70 93 L -70 83" stroke="#d4a574" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 75 95 L 75 85" stroke="#d4a574" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 70 93 L 70 83" stroke="#d4a574" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Neck -->
+    <path d="M -8 10 L -10 20 L 10 20 L 8 10 Z" fill="#fbbf24"/>
+    
+    <!-- Head -->
+    <ellipse cx="0" cy="-10" rx="32" ry="38" fill="#fbbf24"/>
+    
+    <!-- Hair - Front Layer -->
+    <path d="M -32 -15 Q -35 -25 -32 -35 Q -28 -45 -20 -48 Q -10 -50 0 -48 Q 10 -50 20 -48 Q 28 -45 32 -35 Q 35 -25 32 -15 L 32 -5 Q 30 5 25 10 L 20 5 Q 22 -5 22 -15 L 22 -25 Q 20 -35 15 -40 Q 10 -43 0 -43 Q -10 -43 -15 -40 Q -20 -35 -22 -25 L -22 -15 Q -22 -5 -20 5 L -25 10 Q -30 5 -32 -5 Z" fill="#5d4037"/>
+    <!-- Side bangs -->
+    <path d="M -28 -20 Q -30 -10 -28 0 L -25 5 Q -26 -5 -25 -15 Z" fill="#5d4037"/>
+    <path d="M 28 -20 Q 30 -10 28 0 L 25 5 Q 26 -5 25 -15 Z" fill="#5d4037"/>
+    
+    <!-- Face Details -->
+    <!-- Eyebrows -->
+    <path d="M -18 -15 Q -12 -18 -6 -15" stroke="#5d4037" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M 6 -15 Q 12 -18 18 -15" stroke="#5d4037" stroke-width="2" stroke-linecap="round" fill="none"/>
+    
+    <!-- Eyes -->
+    <ellipse cx="-12" cy="-8" rx="4" ry="5" fill="#1e293b"/>
+    <ellipse cx="12" cy="-8" rx="4" ry="5" fill="#1e293b"/>
+    <!-- Eye highlights -->
+    <ellipse cx="-11" cy="-10" rx="1.5" ry="2" fill="#ffffff"/>
+    <ellipse cx="13" cy="-10" rx="1.5" ry="2" fill="#ffffff"/>
+    <!-- Eyelashes -->
+    <path d="M -15 -10 L -17 -12" stroke="#1e293b" stroke-width="1" stroke-linecap="round"/>
+    <path d="M -13 -11 L -14 -14" stroke="#1e293b" stroke-width="1" stroke-linecap="round"/>
+    <path d="M 15 -10 L 17 -12" stroke="#1e293b" stroke-width="1" stroke-linecap="round"/>
+    <path d="M 13 -11 L 14 -14" stroke="#1e293b" stroke-width="1" stroke-linecap="round"/>
+    
+    <!-- Nose -->
+    <path d="M 0 -5 L 0 3" stroke="#d4a574" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M -3 3 Q 0 5 3 3" stroke="#d4a574" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    
+    <!-- Lips -->
+    <path d="M -8 10 Q 0 13 8 10" fill="#ec4899" opacity="0.6"/>
+    <path d="M -8 10 Q 0 8 8 10" stroke="#d946a6" stroke-width="1" fill="none"/>
+  </g>
+  
+  <!-- Laptop - Frontal View -->
+  <g transform="translate(400, 420)" filter="url(#dropShadow)">
+    <!-- Laptop base -->
+    <rect x="-90" y="0" width="180" height="12" rx="4" fill="#1e293b"/>
+    <rect x="-85" y="2" width="170" height="8" rx="2" fill="#334155"/>
+    
+    <!-- Screen -->
+    <rect x="-100" y="-110" width="200" height="110" rx="6" fill="#1e293b"/>
+    <rect x="-94" y="-104" width="188" height="98" rx="4" fill="#0f172a"/>
+    
+    <!-- Screen content - Code editor -->
+    <rect x="-88" y="-98" width="176" height="86" rx="3" fill="#0a0a0a"/>
+    
+    <!-- Code lines with syntax highlighting -->
+    <rect x="-80" y="-90" width="40" height="3" rx="1" fill="#06b6d4"/>
+    <rect x="-75" y="-82" width="55" height="3" rx="1" fill="#10b981"/>
+    <rect x="-75" y="-74" width="48" height="3" rx="1" fill="#ec4899"/>
+    <rect x="-80" y="-66" width="60" height="3" rx="1" fill="#8b5cf6"/>
+    <rect x="-75" y="-58" width="45" height="3" rx="1" fill="#06b6d4"/>
+    <rect x="-75" y="-50" width="52" height="3" rx="1" fill="#10b981"/>
+    <rect x="-80" y="-42" width="58" height="3" rx="1" fill="#fbbf24"/>
+    <rect x="-75" y="-34" width="50" height="3" rx="1" fill="#ec4899"/>
+    <rect x="-75" y="-26" width="42" height="3" rx="1" fill="#8b5cf6"/>
+    
+    <!-- Cursor -->
+    <rect x="-18" y="-28" width="2" height="6" fill="#06b6d4">
+      <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Webcam -->
+    <circle cx="0" cy="-107" r="1.5" fill="#64748b"/>
+  </g>
+  
+  <!-- Floating UI Card -->
+  <g transform="translate(580, 200)" filter="url(#dropShadow)">
+    <rect x="0" y="0" width="140" height="80" rx="8" fill="#ffffff"/>
+    <rect x="0" y="0" width="140" height="25" rx="8" fill="#6366f1"/>
+    <rect x="0" y="25" width="140" height="1" fill="#e2e8f0"/>
+    
+    <!-- Icon -->
+    <circle cx="20" cy="12" r="6" fill="#ffffff"/>
+    <path d="M 20 9 L 20 15 M 17 12 L 23 12" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+    
+    <!-- Text lines -->
+    <rect x="15" y="35" width="110" height="4" rx="2" fill="#cbd5e1"/>
+    <rect x="15" y="45" width="85" height="4" rx="2" fill="#e2e8f0"/>
+    <rect x="15" y="55" width="95" height="4" rx="2" fill="#e2e8f0"/>
+    <rect x="15" y="65" width="70" height="4" rx="2" fill="#f1f5f9"/>
+  </g>
+  
+  <!-- Coffee Cup -->
+  <g transform="translate(180, 440)">
+    <ellipse cx="0" cy="0" rx="18" ry="6" fill="#cbd5e1"/>
+    <rect x="-18" y="-28" width="36" height="28" rx="4" fill="#ec4899"/>
+    <rect x="-15" y="-25" width="30" height="22" rx="3" fill="#d946a6"/>
+    <path d="M 18 -14 Q 28 -14 28 -7 Q 28 0 18 0" stroke="#ec4899" stroke-width="3" fill="none"/>
+    
+    <!-- Steam -->
+    <path d="M -6 -32 Q -4 -38 -6 -42" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6">
+      <animate attributeName="d" values="M -6 -32 Q -4 -38 -6 -42;M -6 -32 Q -8 -38 -6 -42;M -6 -32 Q -4 -38 -6 -42" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 0 -32 Q 2 -38 0 -42" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6">
+      <animate attributeName="d" values="M 0 -32 Q 2 -38 0 -42;M 0 -32 Q -2 -38 0 -42;M 0 -32 Q 2 -38 0 -42" dur="2s" repeatCount="indefinite" begin="0.3s"/>
+    </path>
+    <path d="M 6 -32 Q 8 -38 6 -42" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6">
+      <animate attributeName="d" values="M 6 -32 Q 8 -38 6 -42;M 6 -32 Q 4 -38 6 -42;M 6 -32 Q 8 -38 6 -42" dur="2s" repeatCount="indefinite" begin="0.6s"/>
+    </path>
+  </g>
+  
+  <!-- Plant -->
+  <g transform="translate(620, 440)">
+    <rect x="-12" y="0" width="24" height="30" rx="3" fill="#06b6d4" opacity="0.2"/>
+    <ellipse cx="0" cy="0" rx="14" ry="5" fill="#06b6d4" opacity="0.3"/>
+    
+    <!-- Leaves -->
+    <ellipse cx="-10" cy="-25" rx="8" ry="12" fill="#10b981" transform="rotate(-20 -10 -25)"/>
+    <ellipse cx="0" cy="-30" rx="9" ry="14" fill="#10b981"/>
+    <ellipse cx="10" cy="-25" rx="8" ry="12" fill="#10b981" transform="rotate(20 10 -25)"/>
+    <ellipse cx="-8" cy="-15" rx="7" ry="10" fill="#059669" transform="rotate(-15 -8 -15)"/>
+    <ellipse cx="8" cy="-15" rx="7" ry="10" fill="#059669" transform="rotate(15 8 -15)"/>
+  </g>
+  
+  <!-- Floating Tech Icons -->
+  <g opacity="0.6">
+    <!-- Cloud -->
+    <g transform="translate(150, 180)">
+      <path d="M 0 8 Q -8 8 -8 0 Q -8 -8 0 -10 Q 4 -12 8 -10 Q 16 -10 16 0 Q 16 8 8 8 Z" fill="#06b6d4"/>
+      <animate attributeName="transform" values="translate(150, 180);translate(150, 175);translate(150, 180)" dur="3s" repeatCount="indefinite"/>
+    </g>
+    
+    <!-- Code brackets -->
+    <g transform="translate(650, 150)">
+      <text x="0" y="0" font-family="monospace" font-size="24" fill="#8b5cf6" font-weight="bold">&lt;/&gt;</text>
+      <animate attributeName="transform" values="translate(650, 150);translate(650, 145);translate(650, 150)" dur="2.5s" repeatCount="indefinite"/>
+    </g>
+  </g>
+  
+  <!-- Decorative dots -->
+  <circle cx="120" cy="200" r="3" fill="#ec4899" opacity="0.4"/>
+  <circle cx="680" cy="350" r="3" fill="#06b6d4" opacity="0.4"/>
+  <circle cx="140" cy="250" r="2" fill="#10b981" opacity="0.4"/>
+  <circle cx="660" cy="300" r="2" fill="#8b5cf6" opacity="0.4"/>
+</svg>

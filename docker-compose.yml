@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  website:
+    build: .
+    container_name: carolina-website
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    environment:
+      - NGINX_HOST=carolinaherreramonteza.com
+      - NGINX_PORT=80
+    volumes:
+      # Optional: Mount logs for debugging
+      - ./logs:/var/log/nginx
+    # Removed external network for local development
+    # networks:
+    #   - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.carolina-website.rule=Host(`carolinaherreramonteza.com`) || Host(`www.carolinaherreramonteza.com`)"
+      - "traefik.http.routers.carolina-website.entrypoints=websecure"
+      - "traefik.http.routers.carolina-website.tls.certresolver=letsencrypt"
+      - "traefik.http.services.carolina-website.loadbalancer.server.port=80"
+
+# Commented out external network for local development
+# networks:
+#   web:
+#     external: true

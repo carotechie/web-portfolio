@@ -1,0 +1,19 @@
+# AWS Configuration
+aws_region  = "us-east-1"
+environment = "production"
+
+# Domain / S3 bucket name (must be globally unique)
+domain_name = "tech.carolinaherreramonteza.com"
+
+# Custom Domain
+# Set to true once you have an ACM certificate and Route53 zone ready
+enable_custom_domain = false
+
+# ACM Certificate ARN (must be in us-east-1 for CloudFront)
+acm_certificate_arn = ""
+# Example: acm_certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/abc-123"
+
+# Route53 Configuration
+# Provide existing hosted zone ID to reuse it — leave empty to create a new zone
+route53_zone_id = ""
+# Example: route53_zone_id = "Z1234567890ABC"

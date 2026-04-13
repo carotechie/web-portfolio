@@ -1,0 +1,40 @@
+{
+  "name": "carolina-herrera-monteza-website",
+  "version": "1.0.0",
+  "description": "Professional website for Carolina Herrera Monteza - Senior DevOps Engineer",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "python -m http.server 8000",
+    "docker:build": "docker build -t carolina-website .",
+    "docker:run": "docker run -d -p 80:80 --name carolina-website carolina-website",
+    "docker:stop": "docker stop carolina-website && docker rm carolina-website",
+    "docker:compose": "docker-compose up --build",
+    "docker:compose:down": "docker-compose down"
+  },
+  "keywords": [
+    "devops",
+    "portfolio",
+    "website",
+    "professional",
+    "engineer",
+    "speaker",
+    "mentor"
+  ],
+  "author": {
+    "name": "Carolina Herrera Monteza",
+    "email": "contact@carolinaherreramonteza.com",
+    "url": "https://carolinaherreramonteza.com"
+  },
+  "license": "All Rights Reserved",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carolinahm/carolinaherreramonteza.com"
+  },
+  "homepage": "https://carolinaherreramonteza.com",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

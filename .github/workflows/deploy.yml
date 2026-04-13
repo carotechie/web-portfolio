@@ -1,0 +1,186 @@
+name: Deploy Website to AWS
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: # Allow manual trigger
+
+env:
+  AWS_REGION: us-east-1
+  TERRAFORM_VERSION: 1.6.0
+
+jobs:
+  terraform:
+    name: Terraform Plan & Apply
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform
+    
+    permissions:
+      contents: read
+      pull-requests: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+      - name: Terraform Format Check
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -input=false
+        continue-on-error: true
+
+      - name: Comment PR with Terraform Plan
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`terraform
+            ${{ steps.plan.outputs.stdout }}
+            \`\`\`
+
+            </details>
+
+            *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
+
+      - name: Get Terraform Outputs
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        id: terraform-outputs
+        run: |
+          echo "s3_bucket=$(terraform output -raw s3_bucket_name)" >> $GITHUB_OUTPUT
+          echo "cloudfront_id=$(terraform output -raw cloudfront_distribution_id)" >> $GITHUB_OUTPUT
+          echo "website_url=$(terraform output -raw website_url)" >> $GITHUB_OUTPUT
+
+    outputs:
+      s3_bucket: ${{ steps.terraform-outputs.outputs.s3_bucket }}
+      cloudfront_id: ${{ steps.terraform-outputs.outputs.cloudfront_id }}
+      website_url: ${{ steps.terraform-outputs.outputs.website_url }}
+
+  deploy:
+    name: Deploy Website Files
+    needs: terraform
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync files to S3
+        run: |
+          aws s3 sync . s3://${{ needs.terraform.outputs.s3_bucket }}/ \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "terraform/*" \
+            --exclude "node_modules/*" \
+            --exclude ".vscode/*" \
+            --exclude "*.md" \
+            --exclude "Dockerfile" \
+            --exclude "docker-compose.yml" \
+            --exclude ".dockerignore" \
+            --exclude "logs/*" \
+            --delete \
+            --cache-control "public, max-age=3600"
+
+      - name: Set cache headers for static assets
+        run: |
+          # Set long cache for CSS, JS, images
+          aws s3 cp s3://${{ needs.terraform.outputs.s3_bucket }}/styles.css \
+            s3://${{ needs.terraform.outputs.s3_bucket }}/styles.css \
+            --metadata-directive REPLACE \
+            --cache-control "public, max-age=31536000, immutable" \
+            --content-type "text/css"
+          
+          aws s3 cp s3://${{ needs.terraform.outputs.s3_bucket }}/script.js \
+            s3://${{ needs.terraform.outputs.s3_bucket }}/script.js \
+            --metadata-directive REPLACE \
+            --cache-control "public, max-age=31536000, immutable" \
+            --content-type "application/javascript"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ needs.terraform.outputs.cloudfront_id }} \
+            --paths "/*"
+
+      - name: Deployment Summary
+        run: |
+          echo "✅ Website deployed successfully!"
+          echo "🌐 URL: ${{ needs.terraform.outputs.website_url }}"
+          echo "📦 S3 Bucket: ${{ needs.terraform.outputs.s3_bucket }}"
+          echo "🚀 CloudFront Distribution: ${{ needs.terraform.outputs.cloudfront_id }}"
+
+  notify:
+    name: Notify Deployment Status
+    needs: [terraform, deploy]
+    if: always() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deployment Success
+        if: needs.deploy.result == 'success'
+        run: |
+          echo "🎉 Deployment completed successfully!"
+          echo "Website is live at: ${{ needs.terraform.outputs.website_url }}"
+
+      - name: Deployment Failed
+        if: needs.deploy.result == 'failure' || needs.terraform.result == 'failure'
+        run: |
+          echo "❌ Deployment failed!"
+          echo "Please check the logs above for details."
+          exit 1
