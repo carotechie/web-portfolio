@@ -150,48 +150,19 @@ curl -I $(cd terraform && terraform output -raw website_url)
 
 ## Optional — Custom domain with HTTPS (10 min)
 
-Only do this if you have a domain registered and its hosted zone is in Route53.
+Only do this if you have a domain ready. There are 3 ways to set it up depending on where your domain is:
 
-### Request an ACM certificate
+- No domain yet → buy one in Route53
+- Domain at GoDaddy, Namecheap, etc. → move DNS to Route53
+- Keep domain at your registrar → just point a CNAME to CloudFront
 
-```bash
-aws acm request-certificate \
-  --domain-name your.domain.com \
-  --validation-method DNS \
-  --region us-east-1
-```
+Full step-by-step for all 3 scenarios: [WORKSHOP_CUSTOM_DOMAIN.md](WORKSHOP_CUSTOM_DOMAIN.md)
 
-Get the ARN:
-```bash
-aws acm list-certificates --region us-east-1 --output json
-```
-
-Validate it — go to ACM in the AWS Console, open the certificate, click "Create records in Route53". Wait ~5 minutes for status to change to "Issued".
-
-### Get your hosted zone ID
-
-```bash
-aws route53 list-hosted-zones --output json \
-  --query "HostedZones[?contains(Name, 'yourdomain.com')].Id" \
-  --output text
-```
-
-### Update terraform.tfvars
-
-```hcl
-enable_custom_domain = true
-domain_name          = "your.domain.com"
-acm_certificate_arn  = "arn:aws:acm:us-east-1:ACCOUNT_ID:certificate/CERT_ID"
-route53_zone_id      = "YOUR_ZONE_ID"
-```
-
-### Re-deploy
+Once your certificate is issued and `terraform.tfvars` is updated with `enable_custom_domain = true`, `acm_certificate_arn`, and `route53_zone_id`, re-run:
 
 ```bash
 ./deploy-to-aws.sh
 ```
-
-DNS propagation can take up to 48 hours, but usually works within minutes if your domain is already in Route53.
 
 ---
 

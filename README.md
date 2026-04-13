@@ -24,6 +24,8 @@ Clone the repo, run it locally, and use Kiro to personalize it with your own det
 
 Deploy your website to AWS using Terraform. Covers the state bucket bootstrap, infrastructure deploy, file upload, and optionally connecting a custom domain with HTTPS.
 
+- [Custom Domain Setup Guide](WORKSHOP_CUSTOM_DOMAIN.md) — buy a domain in AWS, move from another registrar, or keep it where it is
+
 ---
 
 ## Reference docs
