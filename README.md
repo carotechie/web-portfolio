@@ -1,5 +1,7 @@
 # Build Your Own Portfolio Website — Workshop
 
+> 🇪🇸 ¿Prefieres leer esto en español? → [README.es.md](README.es.md)
+
 Welcome! This is a 2-part hands-on workshop where you'll build and deploy your own personal portfolio website, using this site as a template.
 
 By the end you'll have a live website on AWS with your own resume, skills, and experience — customized to look like yours.
