@@ -8,6 +8,17 @@ terraform {
     }
   }
 
+  # ---------------------------------------------------------------
+  # STEP 1 — First time (before bootstrap is run)
+  # Use local backend. Run: terraform init && terraform apply
+  # ---------------------------------------------------------------
+  # backend "local" {}
+
+  # ---------------------------------------------------------------
+  # STEP 2 — After bootstrap creates tf-state-carotechie bucket
+  # Comment out backend "local" above, uncomment this block,
+  # then run: terraform init -migrate-state
+  # ---------------------------------------------------------------
   backend "s3" {
     bucket  = "tf-state-carotechie"
     key     = "website/terraform.tfstate"

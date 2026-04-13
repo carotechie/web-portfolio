@@ -10,8 +10,7 @@ Follow these in order:
 
 1. [Requirements](requirements.md) — tools and accounts you need before anything else
 2. [Run Locally](QUICK_START.md) — get the site running on your machine with Docker
-3. [Deployment Summary](DEPLOYMENT_SUMMARY.md) — overview of what's deployed and where
-4. [AWS Deployment Guide](AWS_DEPLOYMENT_GUIDE.md) — full step-by-step guide to deploy on AWS with Terraform
+3. [Deployment Guide](DEPLOYMENT_GUIDE.md) — run locally, first-time AWS deploy, and ongoing updates
 
 ---
 

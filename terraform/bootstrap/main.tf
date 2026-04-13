@@ -8,13 +8,22 @@ terraform {
     }
   }
 
-  # Local backend — intentional for bootstrap.
-  # After apply, migrate state to S3 by following the README instructions.
+  # ---------------------------------------------------------------
+  # STEP 1 — First time (bucket doesn't exist yet)
+  # Use local backend. Run: terraform init && terraform apply
+  # ---------------------------------------------------------------
+  # backend "local" {}
+
+  # ---------------------------------------------------------------
+  # STEP 2 — After bucket is created
+  # Comment out backend "local" above, uncomment this block,
+  # then run: terraform init -migrate-state
+  # ---------------------------------------------------------------
   backend "s3" {
-     bucket  = "tf-state-carotechie"
-     key     = "bootstrap/terraform.tfstate"
-     region  = "us-east-1"
-     encrypt = true
+    bucket  = "tf-state-carotechie"
+    key     = "bootstrap/terraform.tfstate"
+    region  = "us-east-1"
+    encrypt = true
   }
 }
 provider "aws" {
