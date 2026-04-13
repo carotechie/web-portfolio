@@ -1,69 +1,36 @@
-# Carolina Herrera Monteza — Personal Website
+# Build Your Own Portfolio Website — Workshop
 
-Personal portfolio website for Carolina Herrera Monteza, Senior DevOps Engineer with 11+ years of experience. Built with HTML, CSS, and JavaScript, served via Nginx on Docker, and deployed to AWS using Terraform.
+Welcome! This is a 2-part hands-on workshop where you'll build and deploy your own personal portfolio website, using this site as a template.
 
----
-
-## Docs
-
-Follow these in order:
-
-1. [Requirements](requirements.md) — tools and accounts you need before anything else
-2. [Run Locally](QUICK_START.md) — get the site running on your machine with Docker
-3. [Deployment Guide](DEPLOYMENT_GUIDE.md) — run locally, first-time AWS deploy, and ongoing updates
+By the end you'll have a live website on AWS with your own resume, skills, and experience — customized to look like yours.
 
 ---
 
-## Want to build your own version?
+## Before the workshop
 
-Use the Kiro prompt below to generate a personalized version of this website for yourself — just swap in your own details.
+Install everything listed in [requirements.md](requirements.md) before you show up. The workshop won't have time for installs.
 
 ---
 
-### Kiro Prompt
+## Workshop parts
 
-```
-I want to build a personal portfolio website similar to this one. Help me customize it with my own details.
+### Part 1 — Build your website locally (40 min)
+[WORKSHOP_PART1_LOCAL.md](WORKSHOP_PART1_LOCAL.md)
 
-Here is what I want to change:
+Clone the repo, run it locally, and use Kiro to personalize it with your own details — name, experience, skills, colors, and more.
 
-**Personal info:**
-- Name: [Your Full Name]
-- Title: [Your Job Title]
-- Years of experience: [X]
-- Bio: [2-3 sentences about yourself]
-- LinkedIn: [your LinkedIn URL]
-- GitHub: [your GitHub URL]
-- Blog: [your blog URL, or remove if none]
+### Part 2 — Deploy to AWS (50 min)
+[WORKSHOP_PART2_AWS.md](WORKSHOP_PART2_AWS.md)
 
-**Experience:**
-[List each role like this]
-- [Year range] | [Job Title] | [Company / Client]
-  Description: [what you did]
-  Tech stack: [tools and technologies]
+Deploy your website to AWS using Terraform. Covers the state bucket bootstrap, infrastructure deploy, file upload, and optionally connecting a custom domain with HTTPS.
 
-**Skills:**
-[List your main skill categories and tools]
+---
 
-**Talks or presentations:**
-[List any YouTube links or conference talks, or say "none"]
+## Reference docs
 
-**Mentorship:**
-[Describe any mentorship work, or say "none"]
-
-**Color theme:**
-- Primary color: [e.g. indigo, teal, orange — or provide a hex code]
-
-**Domain:**
-- Website URL: [your domain or subdomain]
-
-Once I provide these details, please:
-1. Update index.html with my information
-2. Update styles.css to use my chosen color as the primary theme color
-3. Update the meta description and page title
-4. Update terraform/terraform.tfvars with my domain name
-5. Keep the bilingual (EN/ES) structure but update all content to reflect my details
-```
+- [Deployment Guide](DEPLOYMENT_GUIDE.md) — full deploy reference for first time and updates
+- [Terraform README](terraform/README.md) — infrastructure details and IAM permissions
+- [Bootstrap README](terraform/bootstrap/README.md) — state bucket setup
 
 ---
 
