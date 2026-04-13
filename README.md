@@ -1,181 +1,80 @@
-# Carolina Herrera Monteza - Personal Website
+# Carolina Herrera Monteza — Personal Website
 
-A professional website showcasing Carolina Herrera Monteza's expertise as a Senior DevOps Engineer with over 11 years of experience.
+Personal portfolio website for Carolina Herrera Monteza, Senior DevOps Engineer with 11+ years of experience. Built with HTML, CSS, and JavaScript, served via Nginx on Docker, and deployed to AWS using Terraform.
 
-## Features
+---
 
-- **Responsive Design**: Optimized for all devices (desktop, tablet, mobile)
-- **Bilingual Support**: English (primary) and Spanish languages
-- **Modern UI**: Clean, professional design with Kiro purple theme
-- **Performance Optimized**: Fast loading with optimized assets
-- **SEO Friendly**: Proper meta tags and semantic HTML
-- **Dockerized**: Ready for deployment with Docker
+## Docs
 
-## Sections
+Follow these in order:
 
-- **Hero**: Introduction and social links
-- **About**: Professional background and skills
-- **Experience**: Career timeline and achievements
-- **Speaking**: Conference topics and community involvement
-- **Mentorship**: Mujeres IT program participation
-- **Contact**: Professional contact information and blog link
+1. [Requirements](requirements.md) — tools and accounts you need before anything else
+2. [Run Locally](QUICK_START.md) — get the site running on your machine with Docker
+3. [Deployment Summary](DEPLOYMENT_SUMMARY.md) — overview of what's deployed and where
+4. [AWS Deployment Guide](AWS_DEPLOYMENT_GUIDE.md) — full step-by-step guide to deploy on AWS with Terraform
 
-## Technologies Used
+---
 
-- HTML5
-- CSS3 (Custom properties, Grid, Flexbox)
-- Vanilla JavaScript
-- Font Awesome icons
-- Google Fonts (Inter)
-- Nginx (for serving)
-- Docker & Docker Compose
+## Want to build your own version?
 
-## Local Development
+Use the Kiro prompt below to generate a personalized version of this website for yourself — just swap in your own details.
 
-### Prerequisites
-- Docker and Docker Compose installed
-- Modern web browser
+---
 
-### Running Locally
+### Kiro Prompt
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd carolina-website
+```
+I want to build a personal portfolio website similar to this one. Help me customize it with my own details.
+
+Here is what I want to change:
+
+**Personal info:**
+- Name: [Your Full Name]
+- Title: [Your Job Title]
+- Years of experience: [X]
+- Bio: [2-3 sentences about yourself]
+- LinkedIn: [your LinkedIn URL]
+- GitHub: [your GitHub URL]
+- Blog: [your blog URL, or remove if none]
+
+**Experience:**
+[List each role like this]
+- [Year range] | [Job Title] | [Company / Client]
+  Description: [what you did]
+  Tech stack: [tools and technologies]
+
+**Skills:**
+[List your main skill categories and tools]
+
+**Talks or presentations:**
+[List any YouTube links or conference talks, or say "none"]
+
+**Mentorship:**
+[Describe any mentorship work, or say "none"]
+
+**Color theme:**
+- Primary color: [e.g. indigo, teal, orange — or provide a hex code]
+
+**Domain:**
+- Website URL: [your domain or subdomain]
+
+Once I provide these details, please:
+1. Update index.html with my information
+2. Update styles.css to use my chosen color as the primary theme color
+3. Update the meta description and page title
+4. Update terraform/terraform.tfvars with my domain name
+5. Keep the bilingual (EN/ES) structure but update all content to reflect my details
 ```
 
-2. Build and run with Docker Compose:
-```bash
-docker-compose up --build
-```
+---
 
-3. Open your browser and navigate to:
-```
-http://localhost
-```
+## Tech stack
 
-### Development without Docker
-
-1. Serve the files using any local server:
-```bash
-# Using Python
-python -m http.server 8000
-
-# Using Node.js (if you have http-server installed)
-npx http-server
-
-# Using PHP
-php -S localhost:8000
-```
-
-2. Open your browser and navigate to the local server URL.
-
-## Deployment
-
-### Docker Deployment
-
-1. Build the Docker image:
-```bash
-docker build -t carolina-website .
-```
-
-2. Run the container:
-```bash
-docker run -d -p 80:80 --name carolina-website carolina-website
-```
-
-### Production Deployment
-
-For production deployment, consider:
-
-1. **SSL/TLS**: Use a reverse proxy like Traefik or Nginx Proxy Manager
-2. **CDN**: Implement CloudFlare or similar for global content delivery
-3. **Monitoring**: Add health checks and monitoring
-4. **Backup**: Regular backups of the container and data
-
-### Environment Variables
-
-The Docker setup supports the following environment variables:
-
-- `NGINX_HOST`: Domain name (default: carolinaherreramonteza.com)
-- `NGINX_PORT`: Port number (default: 80)
-
-## Blog Integration
-
-The website includes links to `blog.carolinaherreramonteza.com`. To set up the blog:
-
-1. Configure DNS to point the subdomain to your blog platform
-2. Update the blog links in the HTML if using a different URL
-3. Consider using platforms like:
-   - Ghost
-   - WordPress
-   - Hugo/Jekyll with GitHub Pages
-   - Medium custom domain
-
-## Customization
-
-### Colors
-The website uses CSS custom properties for easy theming. Main colors are defined in `:root`:
-
-```css
-:root {
-    --kiro-purple: #6366f1;
-    --kiro-purple-dark: #4f46e5;
-    --kiro-purple-light: #8b5cf6;
-}
-```
-
-### Content
-Update the content by modifying:
-- `index.html`: Main content and structure
-- `script.js`: Translations and interactive features
-- `styles.css`: Styling and layout
-
-### Languages
-Add new languages by:
-1. Extending the `translations` object in `script.js`
-2. Adding new language buttons in the navigation
-3. Adding corresponding `data-*` attributes to HTML elements
-
-## Performance
-
-The website is optimized for performance:
-- Minified and compressed assets
-- Lazy loading for images
-- Efficient CSS and JavaScript
-- Nginx gzip compression
-- Browser caching headers
-
-## Security
-
-Security features included:
-- Content Security Policy headers
-- XSS protection
-- Frame options
-- Content type sniffing protection
-- Hidden file access denial
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## Contributing
-
-This is a personal website. For suggestions or issues, please contact Carolina directly through her social media channels.
+- HTML5, CSS3, Vanilla JavaScript
+- Nginx + Docker
+- AWS S3 + CloudFront + Route53 + ACM
+- Terraform
 
 ## License
 
 © 2026 Carolina Herrera Monteza. All rights reserved.
-
-## Contact
-
-- **LinkedIn**: [carolinahm](https://www.linkedin.com/in/carolinahm)
-- **Instagram**: [@carotechie](https://instagram.com/carotechie)
-- **X (Twitter)**: [@carotechie](https://x.com/carotechie)
-- **YouTube**: [TechconCarotechie](https://www.youtube.com/@TechconCarotechie)
-- **Blog**: [blog.carolinaherreramonteza.com](https://blog.carolinaherreramonteza.com)# web-portfolio
-# web-portfolio
